@@ -1,7 +1,11 @@
 package com.example.entities;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.model.Genero;
 
@@ -29,7 +33,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class Estudiante {
+public class Estudiante implements Serializable{
+       private static final long serialVersionUID = 1L;
+
        @Id
        @GeneratedValue(strategy=GenerationType.IDENTITY)
        private int id;
@@ -41,6 +47,9 @@ public class Estudiante {
 
        @Enumerated(EnumType.STRING)
        private Genero genero;
+
+       @DateTimeFormat(pattern="yyyy-MM-dd")
+       private LocalDate fechaMatriculacion;
 
 
        @ManyToOne (fetch = FetchType.LAZY)
