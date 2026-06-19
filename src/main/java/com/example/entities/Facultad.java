@@ -16,6 +16,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="facultades")
@@ -24,6 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@ToString(exclude = "estudiantes")
 public class Facultad implements Serializable{
     private static final long serialVersionUID = 1L;
 
