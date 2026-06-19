@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Estudiantes</title>
+</head>
+
+<body>
+        <h1>Listado de Estudiantes</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Primer Apellido</th>
+                <th>Segundo Apellido</th>
+                <th>Genero</th>
+                <th>Fecha de Matriculación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- "th" es la inicialización de Thymeleaf
+                 "each" es como un forEach mejorado para recuperar los datos del parámetro 
+                 que enviamos desde el EstudianteController como model.addAtributte
+                 {} aquello que va dentro de llaves se considera Spring Expresion Language  -->
+            <tr th:each="estudiante:${estudiantes}">
+                <td th:text="${estudiante.nombre}"></td>
+                <td th:text="${estudiante.primerApellido}"></td>
+                <td th:text="${estudiante.segundoApellido}"></td>
+                <td th:text="${estudiante.genero}"></td>
+                <td th:text="${estudiante.fechaMatriculacion}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
