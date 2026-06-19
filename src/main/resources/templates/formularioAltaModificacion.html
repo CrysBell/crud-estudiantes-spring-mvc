@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Alta/Modificación</title>
+</head>
+<body>
+    <h1>Gestión de Estudiantes</h1>
+
+    
+    <fieldset>
+        <legend>Formulario de Alta o Modificación</legend>
+        
+        <form action="" method="post">
+            <input type="hidden" th:field="*{id}">    
+            <div>
+                <!-- el * en Thymeleaf  -->
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required th:field="*{nombre}">
+            </div>
+            <div>
+                <label for="primerApellido">Primer Apellido</label>
+                <input type="text" id="primerApellido" name="primerApellido" required>
+            </div>
+            <div>
+                <label for="segundoApellido">Segundo Apellido</label>
+                <input type="text" id="segundoApellido" name="segundoApellido" required>
+            </div>
+            <div>
+                <fieldset>
+                    <legend>Genero:</legend>
+                    <label for="hombre"> Hombre</label>
+                    <input type="radio" id="hombre" name="genero" value="HOMBRE">
+
+                    <label for="mujer">Mujer</label>
+                    <input type="radio" name="genero" id="mujer" value="MUJER">
+
+                    <label for="otro">Otro</label>
+                    <input type="radio" name="genero" id="otro" value="OTRO">
+                </fieldset>
+            </div>
+
+            <div>
+                <label for="fechaMatriculacion">Fecha de Matriculacion:</label>
+                <input type="date" name="fechaMatriculacion" id="fechaMatriculacion">
+            </div>
+            <div>
+                <label for="numerosTelefono">Telefonos</label>
+                <input type="text" name="numerosTelefono" id="numerosTelefono" placeholder="Uno o varios separados por ;">
+            </div>
+            <div>
+                <label for="direccionesCorreo">Correos</label>
+                <input type="text" name="direccionesCorreo" id="direccionesCorreo" placeholder="Uno o varios separados por ;">
+            </div>
+            <div>
+                <label for="facultades">Facultad:</label>
+                <select name="facultades" id="facultades">
+                    <option></option>
+                    <option th:each="fac:${facultades}" th:value="${fac.id}" th:text="${fac.nombre}"></option>
+                </select>
+            </div>
+
+    </form>
+        </fieldset>
+
+</body>
+</html>
