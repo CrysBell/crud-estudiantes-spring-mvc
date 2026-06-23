@@ -47,6 +47,9 @@ public class CrudEstudiantesSpringMvcApplication implements CommandLineRunner{
 	facultadService.saveFacultad(facultad1);
 	facultadService.saveFacultad(facultad2);
 
+
+	
+
 	Estudiante estudiante1 = Estudiante.builder()
 			.nombre("Vaiana")
 			.primerApellido("De Motunui")

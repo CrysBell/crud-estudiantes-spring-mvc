@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -171,69 +172,86 @@
             font-size: 1.8rem;
         }
     }
+
+        .error {
+			color: red;
+			font-size: 100%;
+			font-weight: bold;
+		}
 </style>
 
 
 <body>
     <div>
-         <h1>Gestión de Estudiantes</h1>
+        <h1>Gestión de Estudiantes</h1>
     </div>
-   
-    
+
+
     <fieldset>
         <legend>Formulario de Alta o Modificación</legend>
-        
-        <form action="" method="post">
-            <input type="hidden" th:field="*{id}">    
-            <div>
-                <!-- el * en Thymeleaf  -->
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" required th:field="*{nombre}">
+
+        <form th:action="@{/estudiantes/persistir}" method="post" th:object="${estudiante}">
+            <input type="hidden" th:field="*{id}">
+             <div>
+                <label for="nombre">Nombre: </label>
+                <input type="text" id="nombre" required th:field="*{nombre}">
+                <p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error">Nombre Incorrecto</p>
             </div>
             <div>
-                <label for="primerApellido">Primer Apellido</label>
-                <input type="text" id="primerApellido" name="primerApellido" required>
+                <label for="primerApellido">Primer Apellido: </label>
+                <input type="text" id="primerApellido" name="primerApellido" required="required"
+                    th:field="*{primerApellido}">
+                <p th:if="${#fields.hasErrors('primerApellido')}" th:errors="*{primerApellido}" class="error">Primer
+                    Apellido Incorrecto</p>
             </div>
             <div>
-                <label for="segundoApellido">Segundo Apellido</label>
-                <input type="text" id="segundoApellido" name="segundoApellido" required>
+                <label for="segundoApellido">Segundo Apellido: </label>
+                <input type="text" id="segundoApellido" name="segundoApellido" th:field="*{segundoApellido}">
+                <p th:if="${#fields.hasErrors('segundoApellido')}" th:errors="*{segundoApellido}" class="error">Segundo
+                    Apellido Incorrecto</p>
             </div>
             <div>
                 <fieldset>
-                    <legend>Genero:</legend>
-                    <label for="hombre"> Hombre</label>
-                    <input type="radio" id="hombre" name="genero" value="HOMBRE">
-
-                    <label for="mujer">Mujer</label>
-                    <input type="radio" name="genero" id="mujer" value="MUJER">
-
-                    <label for="otro">Otro</label>
-                    <input type="radio" name="genero" id="otro" value="OTRO">
+                    <legend>Genero</legend>
+                    <label for="hombre">Hombre: </label>
+                    <input type="radio" id="hombre" name="genero" value="HOMBRE" th:field="*{genero}">
+                    <label for="mujer">Mujer: </label>
+                    <input type="radio" id="mujer" name="genero" value="MUJER" th:field="*{genero}">
+                    <label for="otro">Otro: </label>
+                    <input type="radio" id="otro" name="genero" value="OTRO" th:field="*{genero}">
                 </fieldset>
             </div>
 
             <div>
-                <label for="fechaMatriculacion">Fecha de Matriculacion:</label>
-                <input type="date" name="fechaMatriculacion" id="fechaMatriculacion">
+                <label for="fechaMatriculacion">Fecha de Alta: </label>
+                <input type="date" id="fechaMatriculacion" name="fechaMatriculacion" th:field="*{fechaMatriculacion}" therr>
+                <p th:if="${#fields.hasErrors('fechaMatriculacion')}" th:errors="*{fechaMatriculacion}" class="error">Fecha Incorrecta</p>
             </div>
             <div>
-                <label for="numerosTelefono">Telefonos</label>
-                <input type="text" name="numerosTelefono" id="numerosTelefono" placeholder="Uno o varios separados por ;">
+                <label for="numerosTelefono">Telefonos: </label>
+                <input type="text" id="numerosTelefono" name="numerosTelefono"
+                    placeholder="Uno o varios separados por ;">
             </div>
             <div>
-                <label for="direccionesCorreo">Correos</label>
-                <input type="text" name="direccionesCorreo" id="direccionesCorreo" placeholder="Uno o varios separados por ;">
+                <label for="direccionesCorreo">Correos: </label>
+                <input type="text" id="direccionesCorreo" name="direccionesCorreo"
+                    placeholder="Uno o varios separados por ;">
             </div>
             <div>
-                <label for="facultades">Facultad:</label>
-                <select name="facultades" id="facultades">
-                    <option></option>
-                    <option th:each="fac:${facultades}" th:value="${fac.id}" th:text="${fac.nombre}"></option>
+                <label for="facultades">Facultad: </label>
+                <select id="facultades" th:field="*{facultad}">
+                    <option value=""></option>
+                    <option th:each="facu : ${facultades}" th:value="${facu.id}" th:text="${facu.nombre}"></option>
                 </select>
             </div>
 
-    </form>
-        </fieldset>
+            <div>
+                <input type="submit" class="btn" value="Alta/Modificacion">
+            </div>
 
+        </form>
+
+    </fieldset>
 </body>
+
 </html>
