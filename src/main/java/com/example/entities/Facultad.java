@@ -27,13 +27,17 @@ import lombok.ToString;
 @Builder
 @ToString(exclude = "estudiantes")
 public class Facultad implements Serializable{
+   
     private static final long serialVersionUID = 1L;
+
 
         @Id
         @GeneratedValue(strategy=GenerationType.IDENTITY)
         private int id;
         private String nombre;
 
+        
+
         @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "facultad" )
-        private List <Estudiante> estudiante;
+        private List<Estudiante> estudiantes;
 }

@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Estudiantes</title>
+    <title>Detalles del Estudiante</title>
 </head>
-
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 *{
     margin: 0;
@@ -33,6 +31,21 @@ h1{
     text-align: center;
     color: #7a5fcf;
     font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 8px rgba(255,255,255,.8);
+}
+
+h2{
+    text-align: center;
+    color: #a65fcf;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 8px rgba(255,255,255,.8);
+}
+h3{
+    text-align: center;
+    color: #546dff;
+    font-size: 1rem;
     margin-bottom: 30px;
     text-shadow: 2px 2px 8px rgba(255,255,255,.8);
 }
@@ -140,41 +153,36 @@ tbody tr:last-child td{
     }
 }
 </style>
-
 <body>
-        <h1>Listado de Estudiantes</h1>
-            <div>
-        <!-- el @ hace referencia que a cntinuación se adjunta una URL y el $ te especifica que es una petición-->
-        <a th:href="@{/estudiantes/alta}">Alta Estudiante</a> 
-    </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Primer Apellido</th>
-                <th>Segundo Apellido</th>
-                <th>Genero</th>
-                <th>Fecha de Matriculación</th>
-                <th> </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- "th" es la inicialización de Thymeleaf
-                 "each" es como un forEach mejorado para recuperar los datos del parámetro 
-                 que enviamos desde el EstudianteController como model.addAtributte
-                 {} aquello que va dentro de llaves se considera Spring Expresion Language  -->
-            <tr th:each="estudiante:${estudiantes}">
-                <td th:text="${estudiante.nombre}"></td>
-                <td th:text="${estudiante.primerApellido}"></td>
-                <td th:text="${estudiante.segundoApellido}"></td>
-                <td th:text="${estudiante.genero}"></td>
-                <td th:text="${estudiante.fechaMatriculacion}"></td>
-                <td> <a th:href="@{/estudiantes/details/} + ${estudiante.id}"> Detalles</a></td>
-            <td> <a th:href="@{/estudiantes/update/}+${estudiante.id}" >Actualizar</a></td> 
-            </tr>
-        </tbody>
-    </table>
-</body>
+    
 
+    <h1 th:text=" 'Detalles del Estudiante: ' + ${estudiante.nombre} + ' ' + ${estudiante.primerApellido} + ' ' + ${estudiante.segundoApellido} "></h1>
+    <h2 th:text=" 'Estudiante en la facultad de: ' + ${estudiante.facultad.nombre}"></h2>
+
+    <div style="background-color: #f6f0ff; display: grid; grid-template-columns: auto auto auto;">
+        <!-- Telefonos del estudiantes -->
+        <div th:if="${estudiante.telefonos.size() > 0}" style="margin: 20px;">
+            <h3 style="margin-right: 40px;">Telefonos:</h3>
+            <ul>
+                <li th:each=" telefono : ${estudiante.telefonos}" th:text="${telefono.numero}"></li>
+            </ul>
+        </div>
+
+        <!-- Correos del estudiantes -->
+        <div th:if="${estudiante.emails.size() > 0 }" style="margin: 20px;">
+         <h3 style="margin-right: 40px;" >Correos :</h3>
+            <ul>
+                <li th:each=" email : ${estudiante.emails}" th:text="${email.email}"></li>
+            </ul>
+        </div>
+        
+        <!-- Fotos del estudiantes -->
+        <div th:if="${estudiante.foto != null }" style="margin: 20px;">
+            <h3>Foto:</h3>
+            <img th:src="@{/imagenes/} + ${estudiante.foto}" alt="Foto del estudiante">
+        </div>
+    </div>
+
+
+</body>
 </html>

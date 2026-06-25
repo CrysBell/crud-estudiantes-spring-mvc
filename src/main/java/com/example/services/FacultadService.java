@@ -8,4 +8,5 @@ public interface FacultadService {
     
     Facultad saveFacultad(Facultad facultad);
     List<Facultad> getAllFacultades();
+    
 }

@@ -8,6 +8,7 @@ import com.example.dao.TelefonoDao;
 import com.example.entities.Estudiante;
 import com.example.entities.Telefono;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -34,6 +35,7 @@ public class TelefonoServiceImpl implements TelefonoService{
 	}
 
 	@Override
+	@Transactional
 	public void deleteByEstudiante(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		telefonoDao.deleteByEstudiante(estudiante);

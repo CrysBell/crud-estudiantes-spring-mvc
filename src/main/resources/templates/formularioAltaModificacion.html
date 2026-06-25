@@ -173,11 +173,11 @@
         }
     }
 
-        .error {
-			color: red;
-			font-size: 100%;
-			font-weight: bold;
-		}
+    .error {
+        color: red;
+        font-size: 100%;
+        font-weight: bold;
+    }
 </style>
 
 
@@ -190,9 +190,9 @@
     <fieldset>
         <legend>Formulario de Alta o Modificación</legend>
 
-        <form th:action="@{/estudiantes/persistir}" method="post" th:object="${estudiante}">
+        <form th:action="@{/estudiantes/persistir}" method="post" th:object="${estudiante}"  enctype="multipart/form-data">
             <input type="hidden" th:field="*{id}">
-             <div>
+            <div>
                 <label for="nombre">Nombre: </label>
                 <input type="text" id="nombre" required th:field="*{nombre}">
                 <p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error">Nombre Incorrecto</p>
@@ -224,25 +224,34 @@
 
             <div>
                 <label for="fechaMatriculacion">Fecha de Alta: </label>
-                <input type="date" id="fechaMatriculacion" name="fechaMatriculacion" th:field="*{fechaMatriculacion}" therr>
-                <p th:if="${#fields.hasErrors('fechaMatriculacion')}" th:errors="*{fechaMatriculacion}" class="error">Fecha Incorrecta</p>
+                <input type="date" id="fechaMatriculacion" name="fechaMatriculacion" th:field="*{fechaMatriculacion}"
+                    therr>
+                <p th:if="${#fields.hasErrors('fechaMatriculacion')}" th:errors="*{fechaMatriculacion}" class="error">
+                    Fecha Incorrecta</p>
             </div>
             <div>
                 <label for="numerosTelefono">Telefonos: </label>
                 <input type="text" id="numerosTelefono" name="numerosTelefono"
-                    placeholder="Uno o varios separados por ;">
+                    placeholder="Uno o varios separados por ;" th:value="${numerosTelefono}">
             </div>
             <div>
                 <label for="direccionesCorreo">Correos: </label>
                 <input type="text" id="direccionesCorreo" name="direccionesCorreo"
-                    placeholder="Uno o varios separados por ;">
+                    placeholder="Uno o varios separados por ;" th:value="${direccionesCorreos}">
             </div>
             <div>
                 <label for="facultades">Facultad: </label>
                 <select id="facultades" th:field="*{facultad}">
                     <option value=""></option>
-                    <option th:each="facu : ${facultades}" th:value="${facu.id}" th:text="${facu.nombre}"></option>
+                    <option th:each="facu : ${facultades}" 
+                            th:value="${facu.id}" 
+                            th:text="${facu.nombre}"></option>
                 </select>
+            </div>
+
+            <div>
+                <label for="file">Foto del empleado</label>
+                <input type="file" name="file" id="file">
             </div>
 
             <div>
