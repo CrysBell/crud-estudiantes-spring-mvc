@@ -150,14 +150,17 @@ public class EstudianteController {
             });
         }
 
-		
+
         //Antes de persistir el empleado hay que eliminar los telefonos y los correos que tenga
-		if (telefonoService.existsByEstudiante(estudiante))
+		if (estudiante.getId() != 0) {
+            if (telefonoService.existsByEstudiante(estudiante))
 		    telefonoService.deleteByEstudiante(estudiante);
 
-		if (correoService.existsByEstudiante(estudiante))
+		    if (correoService.existsByEstudiante(estudiante))
 			correoService.deleteByEstudiante(estudiante);
 
+        }
+       
 
 
 
@@ -183,8 +186,8 @@ public class EstudianteController {
 	}
 
 
-@GetMapping("/update/{id}")
-	public String updateEstudiante(Model model, @PathVariable(name = "id", required = true) int idEstudiante){
+    @GetMapping("/update/{id}")
+    public String updateEstudiante(Model model, @PathVariable(name = "id", required = true) int idEstudiante){
 	
 	Estudiante estudiante = estudianteService.getEstudianteById(idEstudiante);
 
@@ -222,6 +225,41 @@ public class EstudianteController {
 
 		return "formularioAltaModificacion";
 	}
+
+
+
+
+@GetMapping("/delete/{idEstudiante}")
+	public String deleteEstudiante(Model model, @PathVariable int idEstudiante) {
+
+		// Comprobar si el empleado tiene foto para eliminarla
+
+		Estudiante estudianteEliminar = estudianteService.getEstudianteById(idEstudiante);
+
+		if (estudianteEliminar.getFoto() != null) {
+
+			// Ruta relativa del fichero que se va a eliminar
+			Path rutaRelativa = Paths.get("src/main/resources/static/imagenes/"
+					+ estudianteEliminar.getFoto());
+
+			if (Files.exists(rutaRelativa)) {
+
+				try {
+					Files.delete(rutaRelativa);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+
+		// Eliminar el empleado
+
+		estudianteService.deleteEstudiante(estudianteEliminar);;
+
+		return "redirect:/estudiantes/listar";
+	}
+
 
 
 

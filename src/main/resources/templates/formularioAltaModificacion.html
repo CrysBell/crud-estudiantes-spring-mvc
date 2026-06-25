@@ -250,6 +250,10 @@
             </div>
 
             <div>
+                <div th:if="${estudiante.id != 0 && estudiante.foto != null}">
+                <h4>Foto actual de empleado</h4>
+                <img th:src="@{/imagenes/} + ${estudiante.foto}" alt="Foto del estudiante" width="300">
+                </div>
                 <label for="file">Foto del empleado</label>
                 <input type="file" name="file" id="file">
             </div>

@@ -55,6 +55,7 @@ public class CrudEstudiantesSpringMvcApplication implements CommandLineRunner{
 			.primerApellido("De Motunui")
 			.segundoApellido("Princess")
 			.genero(Genero.MUJER)
+			.facultad(facultad1)
 			.fechaMatriculacion(LocalDate.of(2022, 02, 22))
 			.telefonos(
 				Set.of(

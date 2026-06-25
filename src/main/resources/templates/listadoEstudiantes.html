@@ -157,6 +157,7 @@ tbody tr:last-child td{
                 <th>Fecha de Matriculación</th>
                 <th> </th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -172,6 +173,7 @@ tbody tr:last-child td{
                 <td th:text="${estudiante.fechaMatriculacion}"></td>
                 <td> <a th:href="@{/estudiantes/details/} + ${estudiante.id}"> Detalles</a></td>
             <td> <a th:href="@{/estudiantes/update/}+${estudiante.id}" >Actualizar</a></td> 
+            <td> <a th:href="@{/estudiantes/delete/}+${estudiante.id}" >Eliminar</a></td>
             </tr>
         </tbody>
     </table>
