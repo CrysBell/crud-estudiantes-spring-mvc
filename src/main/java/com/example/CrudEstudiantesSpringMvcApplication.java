@@ -1,5 +1,6 @@
 package com.example;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -10,10 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.entities.Correo;
 import com.example.entities.Estudiante;
 import com.example.entities.Facultad;
+import com.example.entities.Profesor;
 import com.example.entities.Telefono;
 import com.example.model.Genero;
 import com.example.services.EstudianteService;
 import com.example.services.FacultadService;
+import com.example.services.ProfesorService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +26,7 @@ public class CrudEstudiantesSpringMvcApplication implements CommandLineRunner{
 
 	private final EstudianteService estudianteService;
 	private final FacultadService facultadService;
+	private final ProfesorService profesorService;
 
 
 	public static void main(String[] args) {
@@ -73,6 +77,33 @@ public class CrudEstudiantesSpringMvcApplication implements CommandLineRunner{
 	estudiante1.getEmails().forEach(correo -> correo.setEstudiante(estudiante1));
 	
 	estudianteService.saveEstudiante(estudiante1);
+
+
+
+
+	Profesor profesor1 = Profesor.builder()
+	.nombre("Angelica Maria")
+			.primerApellido("Bernard")
+			.segundoApellido("Francis")
+			.genero(Genero.MUJER)
+			.facultad(facultad1)
+			.fechaAlta(LocalDate.of(2022, 02, 22))
+			.salario(new BigDecimal(3300.50))
+			.telefonos(
+				Set.of(
+					Telefono.builder().numero("78945612").build()
+				)
+			)
+			.emails(
+				Set.of(
+					Correo.builder().email("lalic@island.com").build()
+				)
+			)
+			.build();
+	
+	profesor1.getTelefonos().forEach(telefono -> telefono.setProfesor(profesor1));
+	profesorService.saveProfesor(profesor1);
+	
 }
 
 }

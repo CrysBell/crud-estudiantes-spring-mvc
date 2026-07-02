@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dao.TelefonoDao;
 import com.example.entities.Estudiante;
+import com.example.entities.Profesor;
 import com.example.entities.Telefono;
 
 import jakarta.transaction.Transactional;
@@ -24,27 +25,49 @@ public class TelefonoServiceImpl implements TelefonoService{
 
 	@Override
 	public Telefono saveTelefono(Telefono telefono) {
-		// TODO Auto-generated method stub
+	
 		return telefonoDao.save(telefono);
 	}
 
 	@Override
 	public boolean existsByEstudiante(Estudiante estudiante) {
-		// TODO Auto-generated method stub
+	
 		return telefonoDao.existsByEstudiante(estudiante);
 	}
 
 	@Override
 	@Transactional
 	public void deleteByEstudiante(Estudiante estudiante) {
-		// TODO Auto-generated method stub
+
 		telefonoDao.deleteByEstudiante(estudiante);
 	}
 
 	@Override
 	public List<Telefono> findByEstudiante(Estudiante estudiante) {
-		// TODO Auto-generated method stub
+	
 		return telefonoDao.findByEstudiante(estudiante);
+	}
+
+
+
+	
+	@Override
+	public boolean existsByProfesor(Profesor profesor) {
+
+		return telefonoDao.existsByProfesor(profesor);
+	}
+
+	@Override
+	@Transactional
+	public void deleteByProfesor(Profesor profesor) {
+
+		telefonoDao.deleteByProfesor(profesor);
+	}
+
+	@Override
+	public List<Telefono> findByProfesor(Profesor profesor) {
+
+		return telefonoDao.findByProfesor(profesor);
 	}
 
 }

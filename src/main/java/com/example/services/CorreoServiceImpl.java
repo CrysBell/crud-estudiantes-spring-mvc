@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.dao.CorreoDao;
 import com.example.entities.Correo;
 import com.example.entities.Estudiante;
+import com.example.entities.Profesor;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -46,6 +47,25 @@ public class CorreoServiceImpl implements CorreoService{
 	public List<Correo> findByEstudiante(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		return correoDao.findByEstudiante(estudiante);
+	}
+
+		@Override
+	public boolean existsByProfesor(Profesor profesor) {
+
+		return correoDao.existsByProfesor(profesor);
+	}
+
+	@Override
+	@Transactional
+	public void deleteByProfesor(Profesor profesor) {
+
+		correoDao.deleteByProfesor(profesor);
+	}
+
+	@Override
+	public List<Correo> findByProfesor(Profesor profesor) {
+
+		return correoDao.findByProfesor(profesor);
 	}
 
 }

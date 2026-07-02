@@ -38,5 +38,9 @@ public class Telefono implements Serializable{
 
     @ManyToOne (fetch = FetchType.LAZY)
     private Estudiante estudiante;
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    private Profesor profesor;
+
 }
 

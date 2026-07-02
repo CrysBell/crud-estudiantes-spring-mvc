@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Profesores</title>
+</head>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(
+        135deg,
+        #ffd6e8 0%,
+        #dce8ff 50%,
+        #ead9ff 100%
+    );
+    padding: 40px 20px;
+}
+
+/* Título */
+h1{
+    text-align: center;
+    color: #7a5fcf;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 8px rgba(255,255,255,.8);
+}
+
+/* Contenedor enlace */
+div{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+/* Botón Alta */
+a{
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 15px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(
+        135deg,
+        #ff9dcf,
+        #9bbcff,
+        #c8a7ff
+    );
+    transition: .3s;
+    box-shadow: 0 5px 15px rgba(180,150,255,.3);
+}
+
+a:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(180,150,255,.4);
+}
+
+/* Tabla */
+table{
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    border-collapse: collapse;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.1),
+        0 0 20px rgba(180,160,255,.2);
+}
+
+/* Cabecera */
+thead{
+    background: linear-gradient(
+        135deg,
+        #ff9dcf,
+        #bba4ff
+    );
+}
+
+thead th{
+    color: white;
+    padding: 18px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Filas */
+tbody td{
+    padding: 16px;
+    text-align: center;
+    color: #5d4b91;
+    border-bottom: 1px solid #ece5ff;
+}
+
+/* Zebra */
+tbody tr:nth-child(even){
+    background: rgba(245,240,255,.5);
+}
+
+/* Hover */
+tbody tr:hover{
+    background: rgba(220,230,255,.8);
+    transition: .3s;
+}
+
+/* Última fila */
+tbody tr:last-child td{
+    border-bottom: none;
+}
+
+/* Responsive */
+@media(max-width: 900px){
+
+    body{
+        padding: 20px 10px;
+    }
+
+    table{
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    h1{
+        font-size: 2rem;
+    }
+}
+</style>
+
+<body>
+        <h1>Listado de Profesores</h1>
+            <div>
+        <!-- el @ hace referencia que a cntinuación se adjunta una URL y el $ te especifica que es una petición-->
+        <a th:href="@{/profesores/alta}">Alta Profesor</a> 
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Primer Apellido</th>
+                <th>Segundo Apellido</th>
+                <th>Genero</th>
+                <th>Fecha de Matriculación</th>
+                <th> </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- "th" es la inicialización de Thymeleaf
+                 "each" es como un forEach mejorado para recuperar los datos del parámetro 
+                 que enviamos desde el ProfesorController como model.addAtributte
+                 {} aquello que va dentro de llaves se considera Spring Expresion Language  -->
+            <tr th:each="profesor:${profesores}">
+                <td th:text="${profesor.nombre}"></td>
+                <td th:text="${profesor.primerApellido}"></td>
+                <td th:text="${profesor.segundoApellido}"></td>
+                <td th:text="${profesor.genero}"></td>
+                <td th:text="${profesor.fechaAlta}"></td>
+                <td th:text="${profesor.salario}"></td>
+                <td> <a th:href="@{/profesores/detailsProf/} + ${profesor.id}"> Detalles</a></td>
+            <td> <a th:href="@{/profesores/update/}+${profesor.id}" >Actualizar</a></td> 
+            <td> <a th:href="@{/profesores/delete/}+${profesor.id}" >Eliminar</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

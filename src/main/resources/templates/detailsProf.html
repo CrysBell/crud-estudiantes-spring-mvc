@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Profesor</title>
+</head>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(
+        135deg,
+        #ffd6e8 0%,
+        #dce8ff 50%,
+        #ead9ff 100%
+    );
+    padding: 40px 20px;
+}
+
+/* Título */
+h1{
+    text-align: center;
+    color: #7a5fcf;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 8px rgba(255,255,255,.8);
+}
+
+h2{
+    text-align: center;
+    color: #a65fcf;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 8px rgba(255,255,255,.8);
+}
+h3{
+    text-align: center;
+    color: #546dff;
+    font-size: 1rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 8px rgba(255,255,255,.8);
+}
+
+/* Contenedor enlace */
+div{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+/* Botón Alta */
+a{
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 15px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(
+        135deg,
+        #ff9dcf,
+        #9bbcff,
+        #c8a7ff
+    );
+    transition: .3s;
+    box-shadow: 0 5px 15px rgba(180,150,255,.3);
+}
+
+a:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(180,150,255,.4);
+}
+
+/* Tabla */
+table{
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    border-collapse: collapse;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.1),
+        0 0 20px rgba(180,160,255,.2);
+}
+
+/* Cabecera */
+thead{
+    background: linear-gradient(
+        135deg,
+        #ff9dcf,
+        #bba4ff
+    );
+}
+
+thead th{
+    color: white;
+    padding: 18px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Filas */
+tbody td{
+    padding: 16px;
+    text-align: center;
+    color: #5d4b91;
+    border-bottom: 1px solid #ece5ff;
+}
+
+/* Zebra */
+tbody tr:nth-child(even){
+    background: rgba(245,240,255,.5);
+}
+
+/* Hover */
+tbody tr:hover{
+    background: rgba(220,230,255,.8);
+    transition: .3s;
+}
+
+/* Última fila */
+tbody tr:last-child td{
+    border-bottom: none;
+}
+
+/* Responsive */
+@media(max-width: 900px){
+
+    body{
+        padding: 20px 10px;
+    }
+
+    table{
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    h1{
+        font-size: 2rem;
+    }
+}
+</style>
+<body>
+    
+
+    <h1 th:text=" 'Detalles del Profesor/a: ' + ${profesor.nombre} + ' ' + ${profesor.primerApellido} + ' ' + ${profesor.segundoApellido} "></h1>
+    <h2 th:text=" 'Profesor en la facultad de: ' + ${profesor.facultad.nombre}"></h2>
+
+    <div style="background-color: #f6f0ff; display: grid; grid-template-columns: auto auto auto;">
+        <!-- Telefonos del profesors -->
+        <div th:if="${profesor.telefonos.size() > 0}" style="margin: 20px;">
+            <h3 style="margin-right: 40px;">Telefonos:</h3>
+            <ul>
+                <li th:each=" telefono : ${profesor.telefonos}" th:text="${telefono.numero}"></li>
+            </ul>
+        </div>
+
+        <!-- Correos del profesors -->
+        <div th:if="${profesor.emails.size() > 0 }" style="margin: 20px;">
+         <h3 style="margin-right: 40px;" >Correos :</h3>
+            <ul>
+                <li th:each=" email : ${profesor.emails}" th:text="${email.email}"></li>
+            </ul>
+        </div>
+        
+        <!-- Fotos del profesors -->
+        <div th:if="${profesor.foto != null }" style="margin: 20px;">
+            <h3>Foto:</h3>
+            <img th:src="@{/imagenes/} + ${profesor.foto}" alt="Foto del profesor" width="300">
+        </div>
+    </div>
+
+
+</body>
+</html>

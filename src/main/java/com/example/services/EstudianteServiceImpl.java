@@ -23,32 +23,32 @@ public class EstudianteServiceImpl implements EstudianteService {
 
 	@Override
 	public Estudiante getEstudianteById(int id) {
-		// TODO Auto-generated method stub
+		
 		return estudianteDao.findById(id).orElseThrow(() -> 
 		          new RuntimeException("Estudiante no encontrado con id: " + id));
 	}
 
 	@Override
 	public Estudiante saveEstudiante(Estudiante estudiante) {
-		// TODO Auto-generated method stub
+		
 		return estudianteDao.save(estudiante);
 	}
 
 	@Override
 	public void deleteEstudiante(int id) {
-		// TODO Auto-generated method stub
+		
 		estudianteDao.deleteById(id);
 	}
 
 	@Override
 	public void deleteEstudiante(Estudiante estudiante) {
-		// TODO Auto-generated method stub
+
 		estudianteDao.delete(estudiante);
 	}
 
 	@Override
 	public Estudiante updateEstudiante(Estudiante estudiante) {
-		// TODO Auto-generated method stub
+	
 		return estudianteDao.save(estudiante);
 	}
 }
